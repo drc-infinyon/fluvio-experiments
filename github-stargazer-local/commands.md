@@ -12,6 +12,22 @@ Copy and run the last line of the install log to update PATH.
 fluvio cluster start
 ```
 
+### Download smart module packages in the cluster
+
+Smart modules are prebuilt transformation log that run on wasm. Download the 2 smart modules you need.
+
+**stars-forks-changes**
+
+```bash
+fluvio hub sm download infinyon-labs/stars-forks-changes@0.1.2
+```
+
+**jolt**
+
+```bash
+fluvio hub sm download infinyon/jolt@0.3.0
+```
+
 ### Ensure you are in the correct directory:
 
 ```bash
