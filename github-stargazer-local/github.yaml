@@ -1,0 +1,18 @@
+apiVersion: 0.1.0
+meta:
+  version: 0.3.1
+  name: github-stars-inbound
+  type: http-source
+  topic: github-stars
+http:
+  endpoint: 'https://api.github.com/repos/[your_org/your_repo]'
+  method: GET
+  interval: 60s
+transforms:
+  - uses: infinyon/jolt@0.3.0
+    with:
+      spec:
+        - operation: shift
+          spec:
+            "stargazers_count": "stars"
+            "forks_count": "forks"

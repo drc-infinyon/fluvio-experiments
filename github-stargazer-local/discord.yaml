@@ -1,0 +1,22 @@
+apiVersion: 0.1.0
+meta:
+  version: 0.2.6
+  name: discord-stars-outbound
+  type: http-sink
+  topic: github-stars
+  secrets:
+    - name: DISCORD_TOKEN
+http:
+  endpoint: "https://discord.com/api/webhooks/${{ secrets.DISCORD_TOKEN }}"
+  headers:
+    - "Content-Type: application/json"
+transforms:
+  - uses: infinyon-labs/stars-forks-changes@0.1.2
+    lookback:
+      last: 1
+  - uses: infinyon/jolt@0.3.0
+    with:
+      spec:
+        - operation: shift
+          spec:
+            "result": "text"
